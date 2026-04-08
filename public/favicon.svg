@@ -1,0 +1,33 @@
+<svg xmlns="http://www.svg.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Minimalist Shadow -->
+  <rect x="74" y="106" width="384" height="360" rx="40" fill="rgba(0,0,0,0.08)" />
+
+  <!-- Background Card -->
+  <rect x="64" y="96" width="384" height="360" rx="40" fill="#ffffff" />
+  
+  <!-- Primary Color Top Banner -->
+  <path d="M64 136C64 113.9 81.9 96 104 96H408C430.1 96 448 113.9 448 136V192H64V136Z" fill="#1da1f2" />
+  
+  <!-- Spiral Bindings Rings (Outer shadow) -->
+  <rect x="120" y="64" width="24" height="64" rx="12" fill="#333333" />
+  <rect x="244" y="64" width="24" height="64" rx="12" fill="#333333" />
+  <rect x="368" y="64" width="24" height="64" rx="12" fill="#333333" />
+
+  <!-- Spiral Bindings Rings (Inner Highlight) -->
+  <rect x="124" y="68" width="16" height="56" rx="8" fill="#dddddd" />
+  <rect x="248" y="68" width="16" height="56" rx="8" fill="#dddddd" />
+  <rect x="372" y="68" width="16" height="56" rx="8" fill="#dddddd" />
+
+  <!-- Calendar Grid Blocks -->
+  <rect x="120" y="240" width="60" height="40" rx="8" fill="#e8f5fd" />
+  <rect x="226" y="240" width="60" height="40" rx="8" fill="#e8f5fd" />
+  <rect x="332" y="240" width="60" height="40" rx="8" fill="#e8f5fd" />
+
+  <rect x="120" y="300" width="60" height="40" rx="8" fill="#e8f5fd" />
+  <rect x="226" y="300" width="60" height="40" rx="8" fill="#1da1f2" /> <!-- Selected day -->
+  <rect x="332" y="300" width="60" height="40" rx="8" fill="#e8f5fd" />
+
+  <rect x="120" y="360" width="60" height="40" rx="8" fill="#e8f5fd" />
+  <rect x="226" y="360" width="60" height="40" rx="8" fill="#e8f5fd" />
+  <rect x="332" y="360" width="60" height="40" rx="8" fill="#e8f5fd" />
+</svg>

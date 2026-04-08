@@ -1,0 +1,594 @@
+/* Calendar Container */
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.wall-calendar {
+  width: 100%;
+  max-width: 800px;
+  background: var(--color-calendar-bg);
+  box-shadow: var(--box-shadow);
+  border-radius: 4px; /* subtle border radius */
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes flipDown {
+  0% { transform: perspective(1000px) rotateX(0deg); opacity: 1; transform-origin: top; }
+  50% { transform: perspective(1000px) rotateX(-90deg); opacity: 0; transform-origin: top; }
+  51% { transform: perspective(1000px) rotateX(90deg); opacity: 0; transform-origin: top; }
+  100% { transform: perspective(1000px) rotateX(0deg); opacity: 1; transform-origin: top; }
+}
+
+.wall-calendar.is-animating {
+  animation: flipDown 0.6s ease-in-out forwards;
+}
+
+/* Ensure theme variables transition smoothly */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.hero-section {
+  transition: background 0.3s ease;
+}
+
+/* Spiral Binding */
+.spiral-binding-container {
+  width: 100%;
+  height: 40px;
+  background-color: #f7f7f7;
+  position: relative;
+  z-index: 10;
+  border-bottom: 1px solid #eaeaea;
+  display: flex;
+  justify-content: center;
+}
+
+.spiral-hanger {
+  position: absolute;
+  top: -20px;
+  width: 50px;
+  height: 30px;
+  border: 4px solid #444;
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.spiral-rings {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 90%;
+  height: 100%;
+}
+
+.spiral-ring {
+  position: relative;
+  width: 10px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.spiral-hole {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #333;
+  position: absolute;
+  top: 5px;
+}
+
+.spiral-coil {
+  position: absolute;
+  top: 8px;
+  width: 6px;
+  height: 26px;
+  background-color: #aaa;
+  border-radius: 4px;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.spiral-hole-bottom {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ddd;
+  position: absolute;
+  bottom: -4px;
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-image-wrapper {
+  width: 100%;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-primary);
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 75% 100%, 30% 75%, 0 95%);
+}
+
+.hero-shape-overlay {
+  display: none;
+}
+
+.hero-month-banner {
+  background-color: var(--color-primary);
+  width: 100%;
+  height: 120px;
+  margin-top: -100px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 75% 100%, 30% 75%, 0 95%);
+  z-index: -1;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 40px;
+  padding-bottom: 20px;
+}
+
+.hero-month-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px; /* Added gap between year and month as requested */
+}
+
+.hero-year {
+  font-size: 2.2rem;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: 2px;
+}
+
+.hero-month {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -1px;
+}
+
+/* Let's fix the clip-path composition so the solid color goes low and is properly placed below the image */
+/* A simpler approach to match the design: the image container has a clip-path. The blue banner is positioned over it/below it. */
+
+/* REFINED HERO LAYOUT */
+.hero-section {
+  background: var(--color-primary);
+  /* The very bottom of the blue background also has a wave pointing down */
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 65% 100%, 40% 90%, 0 100%);
+  padding-bottom: 20px;
+}
+
+.hero-image-wrapper {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 200%); /* We just let the image fill and then the bottom wave is from an SVG or just another clip path */
+  /* Actually the specific cut: */
+  clip-path: polygon(0 0, 100% 0, 100% 65%, 65% 85%, 35% 65%, 0 80%);
+  height: 380px;
+  margin-top: -20px; /* pull up under spiral slightly */
+}
+
+/* Let's redo clip paths to perfectly match the design visual */
+/* Bottom half layout */
+.calendar-bottom-half {
+  display: flex;
+  padding: 40px;
+  gap: 40px;
+  background-color: var(--color-calendar-bg);
+  /* The calendar bottom part is just simple white background */
+}
+
+/* Responsive collapse */
+@media (max-width: 768px) {
+  .calendar-bottom-half {
+    flex-direction: column-reverse; /* Put notes at bottom on mobile */
+    padding: 20px;
+    gap: 30px;
+  }
+}
+
+/* Notes Section */
+.notes-section {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+}
+
+.notes-title {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.notes-lines-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.note-line-wrapper {
+  width: 100%;
+  border-bottom: 1.5px solid #dedede;
+}
+
+.note-line-input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 4px 0;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--color-text-dark);
+  outline: none;
+}
+
+.reset-btn {
+  margin-top: auto;
+  align-self: flex-start;
+  padding: 8px 16px;
+  background: rgba(255, 0, 0, 0.05);
+  color: #d32f2f;
+  border: 1px solid rgba(211, 47, 47, 0.2);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 30px;
+}
+
+.reset-btn:hover {
+  background: rgba(255, 0, 0, 0.1);
+  border-color: rgba(211, 47, 47, 0.5);
+}
+
+/* Calendar Grid */
+.calendar-grid-container {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-header-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.day-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #555;
+}
+
+.day-name.weekend {
+  color: var(--color-primary);
+}
+
+.calendar-dates-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px 0px; 
+}
+
+.day-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  transition: all 0.2s ease;
+  z-index: 1;
+  border-radius: 50%;
+}
+
+.day-cell:hover {
+  background-color: var(--color-primary-light);
+  border-radius: 50%;
+}
+
+.day-cell.padding-day {
+  color: #e0e0e0;
+  font-weight: 400;
+}
+
+.day-number {
+  position: relative;
+  z-index: 2;
+}
+
+.day-number.weekend-num {
+  color: var(--color-primary);
+}
+
+.padding-day .day-number.weekend-num {
+  color: #b3dffc;
+}
+
+/* Selection Styles */
+.day-cell.selected-start,
+.day-cell.selected-end,
+.day-cell.selected-between {
+  background-color: var(--color-primary-light);
+}
+
+.day-cell.selected-start::after,
+.day-cell.selected-end::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.day-cell.selected-start .day-number,
+.day-cell.selected-end .day-number {
+  color: white;
+}
+
+.day-cell.range-start {
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+}
+
+.day-cell.range-end {
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+.day-cell.selected-between {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.day-cell.range-start::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 40px;
+  width: 50%;
+  background-color: var(--color-primary-light);
+  z-index: -2;
+}
+
+.day-cell.range-end::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 40px;
+  width: 50%;
+  background-color: var(--color-primary-light);
+  z-index: -2;
+}
+
+.day-cell.selected-between::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 40px;
+  background-color: var(--color-primary-light);
+  z-index: -2;
+}
+
+/* Holiday markers */
+.holiday-dot {
+  position: absolute;
+  bottom: 8px;
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  z-index: 5;
+}
+
+.selected-start .holiday-dot,
+.selected-end .holiday-dot {
+  background-color: white;
+}
+
+/* Day pop in animation */
+.day-cell {
+  animation: popIn 0.3s ease-out forwards;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Mobile & Tablet Refinements */
+@media (max-width: 768px) {
+  .calendar-container {
+    padding: 10px;
+  }
+  
+  .wall-calendar {
+    border-radius: 0;
+  }
+
+  /* Shrink the Hero section */
+  .hero-image-wrapper {
+    height: 250px;
+  }
+
+  .hero-year {
+    font-size: 1.5rem;
+  }
+  
+  .hero-month {
+    font-size: 1.8rem;
+  }
+
+  /* Adjust Grid for smaller screens */
+  .day-cell {
+    font-size: 0.9rem;
+  }
+
+  /* Shrink the selection circle size so it doesn't overflow the grid */
+  .day-cell.selected-start::after,
+  .day-cell.selected-end::after {
+    width: 34px;
+    height: 34px;
+  }
+
+  .day-cell.range-start::before,
+  .day-cell.range-end::before,
+  .day-cell.selected-between::before {
+    height: 34px;
+  }
+
+  /* Fix the Notes padding */
+  .notes-section {
+    padding-top: 0;
+  }
+
+  /* Responsive bottom half collapse into a column */
+  .calendar-bottom-half {
+    flex-direction: column-reverse; /* Put notes at bottom on mobile */
+    padding: 20px;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 400px) {
+  /* Extreme shrink for tiny phones */
+  .hero-image-wrapper {
+    height: 200px;
+  }
+
+  .hero-year {
+    font-size: 1.2rem;
+  }
+  
+  .hero-month {
+    font-size: 1.5rem;
+  }
+
+  .day-cell {
+    font-size: 0.8rem;
+  }
+  
+  .day-cell.selected-start::after,
+  .day-cell.selected-end::after {
+    width: 28px;
+    height: 28px;
+  }
+
+  .day-cell.range-start::before,
+  .day-cell.range-end::before,
+  .day-cell.selected-between::before {
+    height: 28px;
+  }
+
+  .calendar-bottom-half {
+    padding: 15px;
+    gap: 20px;
+  }
+}
+
+/* --- NAVIGATION BUTTONS --- */
+.nav-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0 10px;
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.nav-btn:active {
+  transform: scale(0.95);
+}
+
+/* --- DESKTOP VIEWPORT SCALING --- */
+/* We dynamically scale down the entire container on short screens. */
+@media screen and (min-width: 769px) {
+  html, body {
+    /* Keep a minimum height but allow scrolling if absolutely needed */
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  
+  body {
+    align-items: center; /* visually center it */
+    padding: 2vh 0;
+  }
+  
+  #root, .App, .calendar-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .wall-calendar {
+    margin-top: 0;
+  }
+}
+
+/* Use standard zoom to shrink the layout box so flex doesn't clip the unscaled box bounds */
+@media screen and (min-width: 769px) and (max-height: 950px) {
+  .wall-calendar { zoom: 0.85; }
+}
+
+@media screen and (min-width: 769px) and (max-height: 800px) {
+  .wall-calendar { zoom: 0.70; }
+}
+
+@media screen and (min-width: 769px) and (max-height: 650px) {
+  .wall-calendar { zoom: 0.55; }
+}
+
+@media screen and (min-width: 769px) and (max-height: 550px) {
+  .wall-calendar { zoom: 0.45; }
+}

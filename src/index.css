@@ -1,0 +1,31 @@
+/* Color Variables */
+:root {
+  --color-primary: #1da1f2; /* A nice vibrant blue like in the image */
+  --color-primary-light: #e8f5fd;
+  --color-text-dark: #333333;
+  --color-text-light: #999999;
+  --color-text-muted: #e0e0e0;
+  --color-bg-main: #f4f6f8;
+  --color-calendar-bg: #ffffff;
+  --color-border: #e6e6e6;
+  --box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  --border-radius-calendar: 8px;
+}
+
+/* Reset and body */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', 'Roboto', 'Segoe UI', Arial, sans-serif;
+  background-color: var(--color-bg-main);
+  color: var(--color-text-dark);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
