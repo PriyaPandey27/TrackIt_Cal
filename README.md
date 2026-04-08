@@ -1,6 +1,8 @@
 # Interactive Wall Calendar
 
 A beautiful, interactive, poster-style wall calendar built with React, TypeScript, and Vite. This project provides a visually appealing calendar interface inspired by physical spiral-bound wall calendars, complete with monthly themes, notes, and drag-to-select functionality.
+<img width="782" height="948" alt="image" src="https://github.com/user-attachments/assets/c9e6f57b-e2ef-4dcf-82b2-8610466377cb" />
+
 
 ## Features & Functions Provided
 
