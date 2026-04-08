@@ -26,7 +26,7 @@ An interactive, poster-style wall calendar built with React, TypeScript, and Vit
 
 ## Video Link - 
 
-https://drive.google.com/drive/home
+https://drive.google.com/file/d/1Gyk96XVOU_0cS3JvFywfav12CgsnmDiq/view?usp=sharing
 
 ## Getting Started
 
