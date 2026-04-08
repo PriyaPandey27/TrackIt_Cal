@@ -21,7 +21,11 @@ const THEMES = [
 ];
 
 export const Calendar: React.FC = () => {
-  const [currentDate, setCurrentDate] = useState(new Date(2026, 0, 1));
+ // const [currentDate, setCurrentDate] = useState(new Date(2026, 0, 1));
+  const [currentDate, setCurrentDate] = useState(() => {
+  const today = new Date();
+  return new Date(today.getFullYear(), today.getMonth(), 1);
+});
   const [startDate, setStartDate] = useState<Date | null>(() => {
     const saved = localStorage.getItem('calendar_startDate');
     return saved ? new Date(saved) : null;
